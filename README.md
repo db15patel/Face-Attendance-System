@@ -1,34 +1,75 @@
-# Attendance-System-Face-Recognition
+# Attendance System with Face Recognition 👥📷
 
-This project is a POC web application demonstrating the use of facial recognition for marking attendance built as a part of my PS -1 internship at [ViitorCloud Technologies, Ahmedabad](https://viitorcloud.com/). It is a web application that can be used by the company to manage attendance of its employees.
+Welcome to the **Attendance System with Face Recognition** repository! This project serves as a Proof of Concept (POC) web application that showcases the application of facial recognition technology for efficient attendance management. By leveraging the power of facial recognition, this web application provides a streamlined solution for tracking attendance within an organization. Specifically designed for companies, it offers an integrated platform to manage employee attendance effectively.
 
-## Functionality Supported
-- Admin and Employee Login
-- Admin : Register new employees.
-- Admin : Add employee photos to the training dataset.
-- Admin: Train the model.
-- Admin: View attendance reports of all employees. Attendance can be filtered by date or employee. 
-- Employee - View attendance reports of self.
+## Table of Contents
 
-## Built Using
-- **OpenCV** - Open Source Computer Vision and Machine Learning software library
-- **Dlib** - C++ Library containing Machine Learning Algorithms
-- **face_recognition** by Adam Geitgey 
-- **Django**- Python framework for web development.
+- [Introduction](#introduction)
+- [Functionality Supported](#functionality-supported)
+- [Technologies Used](#technologies-used)
+- [Recognition Process](#recognition-process)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-### Face Detection
-- Dlib's HOG facial detector.
+## Introduction 📝
 
-### Facial Landmark Detection
-- Dlib's 68 point shape predictor
+This repository houses a web application developed to demonstrate the feasibility of automating attendance management using facial recognition technology. It offers administrators the ability to register new employees, upload their photos for training the model, and subsequently track attendance efficiently. The system enhances employee experience by allowing them to view their personal attendance records.
 
-### Extraction of Facial Embeddings
-- face_recognition by Adam Geitgey
+## Functionality Supported 🚀
 
-### Classification of Unknown Embedding 
-- using a Linear SVM (scikit-learn)
+### Admin Panel 🛠️
 
-The application was tested on data from 25 employees at ViitorCloud Technologies, Ahmedabad.
+- **Admin and Employee Login:** Secure login for administrators and employees.
+- **Register New Employees:** Admins can register new employees within the system.
+- **Add Employee Photos:** Admins can upload employee photos to train the facial recognition model.
+- **Train the Model:** Admins can train the model to recognize registered employees.
+- **Attendance Reports:** Admins can access detailed attendance reports with filtering options.
 
-- [Link to presentation](https://docs.google.com/presentation/d/1Hdo-wKfn3PZxa3964XFmFtiSQEWDXZtQIsgS3v-sfIc/edit?usp=sharing)
-- [Link to report](https://drive.google.com/file/d/126ut3WItK8LcodA6t_1_gY5J6ARcuQAZ/view?usp=sharing)
+### Employee Panel 👤
+
+- **View Personal Attendance Reports:** Employees can view their own attendance records.
+
+## Technologies Used 🛠️
+
+The project leverages various technologies for accurate and efficient face recognition:
+
+- **OpenCV:** Open-source computer vision and machine learning library.
+- **Dlib:** C++ library containing machine learning algorithms.
+- **face_recognition:** A library by Adam Geitgey for simplified face recognition.
+- **Django:** Python framework for web development.
+- **scikit-learn:** Machine learning library for classification.
+
+## Recognition Process 🧐
+
+1. **Face Detection:** Dlib's HOG facial detector identifies faces within images.
+2. **Facial Landmark Detection:** Dlib's 68-point shape predictor enhances recognition accuracy.
+3. **Extraction of Facial Embeddings:** The **face_recognition** library extracts unique facial embeddings.
+4. **Classification of Unknown Embeddings:** Linear SVM classifies unknown embeddings for recognition.
+
+## Usage 📋
+
+To run the web application locally:
+
+1. Clone this repository.
+2. Navigate to the project directory.
+3. Install dependencies using `pip install -r requirements.txt`.
+4. Configure settings and database using Django commands.
+5. Run the development server: `python manage.py runserver`.
+
+## Contributing 🤝
+
+Contributions are welcome! If you have improvements or additional features to suggest, please follow these steps:
+
+1. Fork this repository.
+2. Create a new branch for your feature: `git checkout -b feature/new-feature`.
+3. Add your changes.
+4. Commit your changes: `git commit -m 'Add new feature'`.
+5. Push to your branch: `git push origin feature/new-feature`.
+6. Submit a pull request.
+
+## License 📄
+
+This project is open-source and available under the [MIT License](LICENSE). Feel free to use, modify, and distribute the code for educational purposes.
+
+With the **Attendance System with Face Recognition** repository, attendance management is reimagined through the power of facial recognition, offering a cutting-edge solution for modern organizations seeking efficient, accurate, and user-friendly attendance tracking.
