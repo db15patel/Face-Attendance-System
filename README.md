@@ -9,6 +9,7 @@ Welcome to the **Attendance System with Face Recognition** repository! This proj
 - [Technologies Used](#technologies-used)
 - [Recognition Process](#recognition-process)
 - [Usage](#usage)
+- [Project Documents](#project-documents)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -56,6 +57,17 @@ To run the web application locally:
 3. Install dependencies using `pip install -r requirements.txt`.
 4. Configure settings and database using Django commands.
 5. Run the development server: `python manage.py runserver`.
+
+## Project Documents 📚
+
+Explore the following project documents for additional insights:
+
+- [Project Demo Video](https://drive.google.com/open?id=1GMQ2tmV_bT1xbE58qanOhFf4wRKREAX1&usp=drive_copy)
+- [Poster](https://drive.google.com/open?id=1iMaMjN-jbgh0pXP9qgppnhQSS9wMUjBV&usp=drive_copy)
+- [Presentation Slides](https://drive.google.com/open?id=1W4nGUc55_YIPxzPeLAhyd5-DVzzHoRv2&usp=drive_copy)
+- [Project Report](https://drive.google.com/open?id=1fP65U4hfTYES7BCEWwiIa8zOmTumvt6h&usp=drive_copy)
+- [Software Requirement Specification (SRS) Document](https://drive.google.com/open?id=1BQj5LIcLDhDW-kERn5Pco1Ki3bSJUCmq&usp=drive_copy)
+- [Software Testing Document (STD) Document](https://drive.google.com/open?id=1QSCx9nHptrlx3FiC15t56Kh_aK2n9mUf&usp=drive_copy)
 
 ## Contributing 🤝
 
