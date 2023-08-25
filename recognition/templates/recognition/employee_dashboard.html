@@ -1,0 +1,202 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	  <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+   <style>
+    body{
+      background-size: cover;
+      
+    }
+    ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+  border-right:0px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+b{
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+  color: white;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+ .t{
+  font-weight: bold;
+  color: rgb(88, 88, 88);
+}
+
+   
+   </style>
+
+
+	
+</head>
+<body>
+
+  
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+
+  var p={{p}};
+  var a={{a}};
+  var wo={{wo}};
+  var ho={{ho}};
+  var pj=JSON.parse(p);
+  var aj=JSON.parse(a);
+  var woj=JSON.parse(wo);
+  var hoj=JSON.parse(ho);
+  var data = google.visualization.arrayToDataTable([
+  ['Emp', 'Days'],
+  ['Present', pj],
+  ['Absent', aj],
+  ['WeekOff', woj],
+  ['Holiday', hoj],
+  
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'Attendance Chart', 'width':550, 'height':400};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+</script>
+
+  <ul>
+    <li class="active"><b style="color: white;">Home</b></li>
+    <li><a href="{%url 'view-my-profile' %}">Personal</a></li>
+    <li><a href="{%url 'view-my-attendance-employee-login' %}">Attendance</a></li>
+    <li><a href="{%url 'employee-holiday' %}">Holiday</a></li>
+    <li style="float:right"><a href="{% url 'logout' %}">Logout</a></li>
+  </ul>
+  <h2 style="text-align: center;margin: 1em;">Welcome , {{user}}</h2>
+  
+  <table align="left" style="border:0px solid #ccc;box-shadow: 5px 5px 10px 0px rgba(34, 34, 34, 0.274);width: 20%;height: 10px;margin-top: 1em;margin-left: 2em;">
+    <tr>
+      <td style="padding:10px;background-color: #ccc;text-align: center;font-weight: bold;"><font style="align: center;">Monthly Attendance Chart</font></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: rgb(255, 255, 255);">
+        <div id="piechart"></div>
+
+      </td>
+    </tr>
+
+  </table>
+
+  <table  class="s"  height="200px" width="58%" align="right" style=" box-shadow: 5px 5px 10px 0px rgba(34, 34, 34, 0.274); margin-top: 1em;margin-left: 1em;margin-right: 2em;">
+    <tr>
+      <td colspan="6" style="background-color: #ccc;text-align: center;font-weight: bold;"><font style="align: center;">Month Attendance </font> <a>( {{ds}} - {{df}} )</a></td>
+ 
+    </tr>
+    <tr  class="t"  style=" text-align: center;background-color: rgba(204, 204, 204, 0.24);">
+      <td class="t" width="10%">P</td> 
+      <td class="t" width="10%">A</td>
+      <td class="t" width="10%">WO</td>
+      <td class="t" width="10%"> HO</td>
+      <td class="t" width="10%">Salary Days</td>
+      <td  class="t" width="10%">Total Days</td>
+
+    </tr>
+    <tr cell  style="text-align: center;padding: 15px;">
+      <td >{{p}}</td>
+      <td>{{a}}</td>
+      <td>{{wo}}</td>
+      <td>{{ho}}</td>
+      <td>{{sd}}</td>
+      <td>{{td}}</td>
+
+
+    </tr>
+
+  </table>
+
+</table>
+
+<table  class="s"  height="200px" width="58%" align="right" style=" box-shadow: 5px 5px 10px 0px rgba(34, 34, 34, 0.274); margin-top: 45px;margin-left: 1em;margin-right: 2em;">
+  <tr>
+    <td colspan="4" style="background-color: #ccc;text-align: center;font-weight: bold;"><font style="align: center;">Today's Statistics </font> <a></a></td>
+
+  </tr>
+  <tr  class="t"  style=" text-align: center;background-color: rgba(204, 204, 204, 0.24);">
+    <td class="t" width="10%">Date</td> 
+    <td class="t" width="10%">Status</td>
+    <td class="t" width="10%">Time in</td>
+    <td class="t" width="10%">Time out</td>
+    
+  </tr>
+  <tr cell  style="text-align: center;padding: 15px;">
+    <td >{{today}}</td>
+    {% if status %}
+    <td>P</td> 
+    {%else%}
+    <td>A</td>
+    {%endif%}
+    {% if ti %}
+    <td>{{ti}}</td>
+    {%else%}
+    <td>-</td>
+    {%endif%}
+    {% if to %}
+    <td>{{to}}</td>
+    {%else%}
+    <td>-</td>
+    {%endif%} 
+
+  </tr>
+
+</table>
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+   <style>
+
+     
+    ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+  border-right:0px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+b{
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+  color: white;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+
+.dropbtn {
+  background-color: #333;
+  color: white;
+  padding: 14px 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position:fixed;
+  text-align: left;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #111;
+}
+   </style>
+
+ 
+</head>
+<body>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <script type="text/javascript">
+  // Load google charts
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  
+  // Draw the chart and set the chart values
+  function drawChart() {
+  
+   var p={{p}};
+    var a={{a}};
+    var wo={{wo}};
+    var ho={{ho}};
+    var pj=JSON.parse(p);
+    var aj=JSON.parse(a);
+    var woj=JSON.parse(wo);
+    var hoj=JSON.parse(ho);
+  
+    var data = google.visualization.arrayToDataTable([
+    ['Emp', 'Days'],
+    ['Present', pj],
+    ['Absent', aj],
+    ['WeekOff', wo],
+    ['Holiday', hoj],
+    
+  ]);
+  
+    // Optional; add a title and set the width and height of the chart
+    var options = {'title':'Attendance Chart', 'width':550, 'height':300};
+  
+    // Display the chart inside the <div> element with id="piechart"
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, options);
+  }
+  </script>
+ <ul>
+  <li class="active"><a href="{%url 'dashboard' %}" style="color: white;">Home</a></li>
+  <li class="dropdown">
+    <button class="dropbtn">Attendance Reports</button>
+    <div class="dropdown-content">
+    <a href="{%url 'view-attendance-employee' %}">By Employees</a>
+    <a href="{%url 'view-attendance-date' %}">By Date</a>
+    </div>
+  </li>
+  <li class="dropdown">
+    <button class="dropbtn">Employees</button>
+    <div class="dropdown-content">
+    <a href="{%url 'view-employees' %}">View Employees</a>
+    <a href="{%url 'register' %}">Register Employee</a>
+    <a href="{%url 'add-photos' %}">Add Photo</a>
+    </div>
+    <li><a href="{%url 'train' %}">Train</a></li>
+
+  </li>
+
+
+  <li style="float:right"><a href="{% url 'logout' %}">Logout</a></li>
+</ul>
+
+{% if messages %}
+     {% for message in messages%}
+     <div class="alert alert-{{message.tags}}" > {{message}}</div>
+     {%endfor %}
+
+{%endif%}
+
+<legend class="border-bottom mb-2" style="width: 400px;margin-left: 5em;margin-top: 2em; align: left;"> Select Username And Duration </legend>
+
+<div class="container" style="margin-top: 2em;margin-bottom: 2em;">
+  <table align="left">
+    <tr><td>
+ <div style="width:300px; align:left">
+
+<form method="POST" >
+     {% csrf_token %}
+     <fieldset class="form-group">
+       {{form| crispy}}
+     </fieldset>
+
+     <div class="form-group">
+       <button class="btn btn-outline-info" type="submit"> Submit</button>
+     </div>
+   </form>
+</div>
+</td></tr></table>
+{%if qs%}
+
+<table align="right"  border="0" width="68%" height="400px" style="margin-left: 1em;">
+  <tr>
+    <td>
+      <table height="100%" width="100%">
+        <tr>
+          <td height="10%" style="text-align: center;background-color: rgba(0, 0, 0, 1);color: white;">
+              Attendance Chart
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(204, 204, 204, 0.274);"> <div  style="padding: 10px;" id="piechart"></div>
+
+          </td>
+        </tr>
+      </table>
+
+    </td>
+    <td width="35%">
+      <table height="100%" width="100%">
+        <tr>
+          <td height="10%" style="text-align: center;background-color: rgba(0, 0, 0, 1);color: white;" colspan="2">
+              Attendance Summary
+          </td>
+        </tr>
+        <tr style="text-align: center"><td width="50%">P</td><td>{{p}}</td></tr>
+        <tr style="text-align: center;background-color: rgba(204, 204, 204, 0.274);"><td width="50%">A</td><td>{{a}}</td></tr>
+        <tr style="text-align: center;"><td width="50%">HalfDay</td><td>0</td></tr>
+        <tr style="text-align: center;background-color: rgba(204, 204, 204, 0.274);"><td width="50%">WO</td><td>{{wo}}</td></tr>
+        <tr style="text-align: center;"><td width="50%">HO</td><td>{{ho}}</td></tr>
+        <tr style="text-align: center;background-color: rgba(204, 204, 204, 0.274);"><td width="50%">Salary Days</td><td>{{sd}}</td></tr>
+      </table>
+
+    </td>
+  </tr>
+
+  
+</table>
+
+</div>
+<div style="margin: 10em;margin-top: 10em;">
+<table class="table"  style="margin-top: 5em;">
+   <thead class="thead-dark">
+   <tr>
+       <th scope="col">Date</th>
+       
+       <th scope="col" >Employee</th>
+       <th scope="col">Present</th>
+       <th scope="col">Time in</th>
+       <th scope="col">Time out </th>
+        <th scope="col">Hours </th>
+         <th scope="col"> Break Hours </th>
+         
+
+   </tr>
+</thead>
+<tbody>
+   {% for item in qs %}
+   <tr> 
+          <td>{{ item.d }}</td>
+       <td>{{ item.e}}</td>
+    
+        {% if item.p %}
+       <td> {{item.p}} </td>
+       {% else %}
+       <td> A </td>
+       {% endif %}
+       {% if item.ti %}
+       <td>{{ item.ti }}</td>
+      {% else %}
+      <td> - </td>
+      {% endif %}
+        {% if item.to %}
+       <td>{{ item.to }}</td>
+      {% else %}
+      <td> - </td>
+      {% endif %}
+      <td> {{item.h}}</td>
+         <td> {{item.bh}}</td>
+         
+
+   </tr>
+   {% endfor %}
+</tbody>
+</table>
+
+
+<div class="card" style=" margin-top: 5em; margin-bottom: 10em;">
+  <img class="card-img-top" src="{% static 'recognition/img/attendance_graphs/hours_vs_employee/1.png'%}" alt="Card image cap">
+  <div class="card-body">
+    <p class="card-text" style="text-align: center;">Number of hours worked each day.</p>
+  </div>
+ </div>
+ 
+{% endif %}
+</div>
+
+
+
+
+
+ <!-- Optional JavaScript -->
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+   
+
+</body>
+</html>

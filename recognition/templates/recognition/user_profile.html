@@ -1,0 +1,202 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+     <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+   <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: white;;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    /* Add padding to containers */
+    .container {
+      padding: 16px;
+      background-color: white;
+    }
+    
+    /* Full-width input fields */
+    input[type=text], input[type=password],input[type=email],input[type=number] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+    
+    input[type=text]:focus, input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+    
+    /* Overwrite default styles of hr */
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 25px;
+    }
+    
+    /* Set a style for the submit button */
+    .registerbtn {
+      color: white;
+      padding: 16px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+    }
+    img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+    
+    .registerbtn:hover {
+      opacity: 1;
+    }
+    
+    /* Add a blue text color to links */
+    a {
+      color: dodgerblue;
+    }
+    
+    /* Set a grey background color and center the text of the "sign in" section */
+    .signin {
+      background-color: #f1f1f1;
+      text-align: center;
+    }
+
+    ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+  border-right:0px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+font{
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+  color: white;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+label{ color: #000;}
+
+    </style>
+   
+</head>
+<body>
+
+  <ul>
+    <li class="active"><a href="{%url 'dashboard' %}" style="color: white;">Home</a></li>
+    <li><a href="{%url 'view-my-profile' %}">Personal</a></li>
+    <li><a href="{%url 'view-my-attendance-employee-login' %}">Attendance</a></li>
+    <li><a href="{%url 'employee-holiday' %}">Holiday</a></li>
+
+    <li style="float:right"><a href="{% url 'logout' %}">Logout</a></li>
+  </ul>
+
+ 
+
+
+<div class="container">
+
+<div  style="border: solid  rgba(204, 204, 204, 0.288) 0px; box-shadow: #ccc 0px 0px 20px ;padding: 20px;" >
+<div style="margin-top: 20px;">
+  <img  src="{% static 'recognition/img/user1.png' %}"  class="img-responsive" style="width:150px;height:150px;margin-left: auto;margin-right: auto;"/>
+</div>
+
+  <div class="container" style="border:solid px #ccc;background-color: rgb(255, 255, 255);width: 500px; text-emphasis-color: #222;">
+
+    <form method="POST" action = "{% url 'change-profile' %}">
+      {% csrf_token %}
+
+    {%if q%}<div style="text-color: black;">
+    <label for="email"><b>name</b></label>
+    <input type="text"  name="name" value={{qs}} id="email" required>
+
+    <label for="psw"><b>email</b></label>
+    <input type="email" placeholder="-" name="email" id="psw" required>
+
+    <label for="psw-repeat"><b>Contact</b></label>
+    <input type="number" placeholder="-" name="contact" id="psw-repeat" required>
+
+    <label for="psw-repeat"><b>Department</b></label>
+    <input type="text" placeholder="-" name="department" id="psw-repeat" required>
+    <hr></div>
+    {%endif%}
+    {%if p%}
+    <div style="color: black;">
+      <label for="email" style="color: black;"><b>name</b></label>
+      <input type="text"  name="name" value={{qs.user}} id="email" required>
+
+      <label for="psw"><b>email</b></label>
+      <input type="email" value={{qs.email}} name="email" id="psw" required>
+
+      <label for="psw-repeat"><b>Contact</b></label>
+      <input type="number" value={{qs.contact}} name="contact" id="psw-repeat" required>
+
+      <label for="psw-repeat"><b>Department</b></label>
+      <input type="text" value={{qs.department}} name="department" id="psw-repeat" required>
+      <hr></div>
+      {%endif%}
+    <button type="submit" class="registerbtn" style="background-color: #222;">Save Changes</button>
+    </form>
+  </div>
+  
+
+</div>
+</div>
+
+ <!-- Optional JavaScript -->
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+   
+
+</body>
+</html>

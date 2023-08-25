@@ -1,0 +1,182 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	  <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+	
+</head>
+ <body>
+    
+  <div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  
+    <script type="text/javascript">
+    // Load google charts
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    
+    // Draw the chart and set the chart values
+    function drawChart() {
+    
+      var p={{emp_present_today}};
+      var t={{total_num_of_emp }};
+      var pj=JSON.parse(p);
+      var tj=JSON.parse(t);
+      var lj=tj-pj;
+      var data = google.visualization.arrayToDataTable([
+      ['Present', 'Absent'],
+      ['Present Today', pj ],
+      ['Absent Today', lj],
+    ]);
+  
+      var options = { 'width':550, 'height':300};
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+    }
+    </script></div>
+
+  <div>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <script type="text/javascript">
+  // Load google charts
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  
+  // Draw the chart and set the chart values
+  function drawChart() {
+  
+    var p={{emp_present_today}};
+    var t={{total_num_of_emp }};
+    var pj=JSON.parse(p);
+    var tj=JSON.parse(t);
+    var lj=tj-pj;
+    var data = google.visualization.arrayToDataTable([
+    ['Present', 'Absent'],
+    ['Present Today', pj ],
+    ['Absent Today', lj],
+  ]);
+
+    var options = { 'width':550, 'height':300};
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, options);
+  }
+  </script></div>
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{%url 'view-attendance-home' %}">Attendance Dashboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+     
+      <li class="nav-item active">
+        <a class="nav-link" href="{%url 'view-attendance-employee' %}">By Employee</a>
+      </li>
+        <li class="nav-item active">
+        <a class="nav-link" href="{% url 'view-attendance-date' %}">By Date</a>
+      </li>
+
+
+
+         <li class="nav-item active" style="padding-left: 900px">
+        <a class="nav-link" href="{% url 'dashboard' %}">Back to Admin Panel</a>
+      </li>
+  
+    </ul>
+  </div>
+</nav>
+
+
+
+
+  <div class="card" style="margin-top: 2em; margin-left: 2em; margin-right: 2em; margin-bottom: 0em;">
+    <div class="card-body">
+
+ 
+<h2> Today's Statistics </h2>
+ 	<div class="row" style="margin-left: 1em;height: 16em;">
+    
+<div id="piechart" style="margin-top:0em;align-items: left;"></div>
+<div class="card" style="width: 20em;height: 8em; background-color: #338044; text-align : center; margin-left: 5em; margin-top: 5em; color: white;">
+  <div class="card-body">
+    <h5 class="card-title"> <b>Total Number Of Employees</b></h5>
+    
+    <p class="card-text" style="padding-top: 0em; font-size: 28px;"> <b>{{total_num_of_emp }}</b></p>
+   
+  </div>
+</div>
+
+
+</div>
+
+
+</div>
+</div>
+ 
+
+
+
+ 
+
+
+
+  <div class="card" style="margin-top: 2em; margin-left: 2em; margin-right: 2em; margin-bottom: 2em;">
+    <div class="card-body">
+
+ 
+
+  <div class="row" >
+<div class="col-md-6">
+<h2> Last Week </h2>
+    <div class="card" style="width: 25em;">
+  <img class="card-img-top" src="{% static 'recognition/img/attendance_graphs/last_week/1.png'%}" alt="Card image cap">
+  <div class="card-body">
+    <p class="card-text" style="text-align: center;">Number of employees present each day</p>
+  </div>
+</div>
+
+
+
+
+
+</div>
+<div class="col-md-6">
+  <h2> This Week </h2>
+ <div class="card" style="width: 25em;">
+  <img class="card-img-top" src="{% static 'recognition/img/attendance_graphs/this_week/1.png'%}" alt="Card image cap">
+  <div class="card-body">
+    <p class="card-text" style="text-align: center;">Number of employees present each day</p>
+  </div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+ </body>
+ </html>
+
+ 

@@ -1,0 +1,196 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+     <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <style>
+    body{
+        background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.6));
+  
+        background-size: cover;
+        
+      }
+       
+    .u{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  }
+  
+  li {
+  float: left;
+  border-right:0px solid #bbb;
+  }
+  
+  li:last-child {
+  border-right: none;
+  }
+  
+  li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  }
+  b{
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  }
+  
+  li a:hover:not(.active) {
+  background-color: #111;
+  color: white;
+  }
+  
+  .active {
+  background-color: #4CAF50;
+  }
+  
+  
+  .dropbtn {
+  background-color: #333;
+  color: white;
+  padding: 14px 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  }
+  
+  .dropdown {
+  position: relative;
+  display: inline-block;
+  }
+  
+  .dropdown-content {
+  display: none;
+  position:fixed;
+  text-align: left;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  }
+  
+  .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  .dropdown:hover .dropdown-content {
+  display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+  background-color: #111;
+  }
+   </style>
+
+   
+</head>
+<body>
+
+  <ul class="u">
+    <li class="active"><a href="{%url 'dashboard' %}" style="color: white;">Home</a></li>
+    <li class="dropdown">
+      <button class="dropbtn">Attendance Reports</button>
+      <div class="dropdown-content">
+      <a href="{%url 'view-attendance-employee' %}">By Employees</a>
+      <a href="{%url 'view-attendance-date' %}">By Date</a>
+      </div>
+    </li>
+    <li class="dropdown">
+      <button class="dropbtn">Employees</button>
+      <div class="dropdown-content">
+      <a href="{%url 'view-employees' %}">View Employees</a>
+      <a href="{%url 'register' %}">Register Employee</a>
+      <a href="{%url 'add-photos' %}">Add Photo</a>
+      </div>
+      <li><a href="{%url 'train' %}">Train</a></li>
+  
+    </li>
+
+    <li style="float:right"><a href="{% url 'logout' %}">Logout</a></li>
+  </ul>
+
+
+<div style="margin-top:30px;margin-left: 200px;margin-right: 200px ;background-color:rgba(255, 255, 255, 0.521);padding: 10px;">
+<h3 align="center">Employee Details</h3></div>
+<div class="container">
+ <div style="width:400px;">
+
+
+
+</div>
+
+{%if qs%}
+<table class="table"  style="margin-top: 2em;">
+   <thead class="thead-dark">
+   <tr>
+       <th scope="col">Username</th>
+       <th scope="col" >Email</th>
+       <th scope="col" >Contact</th>
+       <th scope="col" >Department</th>
+      
+   </tr>
+</thead>
+<tbody>
+      {% for i in l %}
+          
+            <tr> 
+              <td>{{ i.user}}</td>
+              <td>{{ i.email}}</td>
+              <td>{{ i.contact}}</td>
+              <td>{{ i.department}}</td>
+
+            </tr>
+      {%endfor%}
+
+   
+</tbody>
+{%endif%}
+</table>
+
+
+
+
+
+{% if messages %}
+     {% for message in messages%}
+     <div class="alert alert-{{message.tags}}" > {{message}}
+     </div>
+     {%endfor %}
+
+   {%endif%}
+
+</div>
+
+ <!-- Optional JavaScript -->
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+   
+
+</body>
+</html>
